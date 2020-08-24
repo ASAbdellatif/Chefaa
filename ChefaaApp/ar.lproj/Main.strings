@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0fj-yt-qFT"; */
+"0fj-yt-qFT.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "1pH-iX-Sv4"; */
+"1pH-iX-Sv4.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "2yi-zb-5Wn"; */
+"2yi-zb-5Wn.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6r9-d8-MHS"; */
+"6r9-d8-MHS.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "H7C-8f-Rex"; */
+"H7C-8f-Rex.text" = "Label";
+
+/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
+"NDk-cv-Gan.text" = "Loaded by SecondViewController";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "Ph4-wW-ChR"; */
+"Ph4-wW-ChR.title" = "Home";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "T9l-dl-cK6"; */
+"T9l-dl-cK6.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Home";
+
+/* Class = "UITabBarItem"; title = "Reminder"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Reminder";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "mKT-PS-DNa"; */
+"mKT-PS-DNa.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "nAZ-5w-lhs"; */
+"nAZ-5w-lhs.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xhV-q9-Ikf"; */
+"xhV-q9-Ikf.text" = "Label";
+
+/* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
+"zEq-FU-wV5.text" = "Second View";
