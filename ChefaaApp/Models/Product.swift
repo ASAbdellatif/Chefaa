@@ -33,7 +33,7 @@ struct Product: Mappable {
     var images: [String]?
     var couponDescription: String?
     var description: String?
-    var price: Int?
+    var price: Double?
     var finalDiscount: Int?
     var addresses: [String]?
     

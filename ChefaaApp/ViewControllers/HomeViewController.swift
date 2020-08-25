@@ -10,9 +10,13 @@ import UIKit
 import RxSwift
 import Kingfisher
 import ImageSlideshow
+import CoreLocation
+import MapKit
+
 
 class HomeViewController: UIViewController {
-    
+    var locationManager: CLLocationManager!
+
     var homeViewModel = HomeViewModel()
     var brandsCollectionViewFlowLayout: UICollectionViewFlowLayout!
     var bestsellingCollectionViewFlowLayout: UICollectionViewFlowLayout!
@@ -78,14 +82,32 @@ class HomeViewController: UIViewController {
     
     var sliderImages = [KingfisherSource]()
     
+    
+    // prepare the view for navigation item
+    var locationButton: UIButton!
+    lazy var titleStackView: UIStackView = {
+        let titleLabel = UILabel()
+        titleLabel.textAlignment = .center
+        titleLabel.text = NSLocalizedString("destination.title", comment: "Destination")
+        titleLabel.font = UIFont.systemFont(ofSize: 13.0)
+        
+        locationButton   = UIButton(type: UIButton.ButtonType.custom)
+        locationButton.setTitleColor(UIColor(named: "Chefaa-green"), for: .normal)
+        locationButton.titleLabel?.font =  UIFont.systemFont(ofSize: 18.0)
+
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, locationButton])
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
                 
-        let leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
-        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        let leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: nil)
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: nil)
 
         leftBarButtonItem.tintColor = .black
         rightBarButtonItem.tintColor = .black
@@ -95,9 +117,7 @@ class HomeViewController: UIViewController {
         showAllBrandsButton.setTitle(NSLocalizedString("show.all.button", comment: "Show All"), for: .normal)
         showAllBestsellingButton.setTitle(NSLocalizedString("show.all.button", comment: "Show All"), for: .normal)
         
-
-
-
+        
         homeViewModel.fetchRemoteHome()
         
         initOffersCollectioView()
@@ -107,6 +127,20 @@ class HomeViewController: UIViewController {
         initSlider()
         initLabels()
         
+        
+        if (CLLocationManager.locationServicesEnabled()) {
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+        }
+        
+        
+        
+        
+        navigationItem.titleView = titleStackView
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -280,5 +314,31 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+}
+
+
+
+
+//MARK:- CLLocationManagerDelegate
+
+extension HomeViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation: CLLocation = locations[0] as CLLocation
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+            if (error != nil){
+                print("error in reverseGeocode")
+            }
+            
+            guard placemarks != nil else { return }
+            let pm = placemarks! as [CLPlacemark]
+            if pm.count>0{
+                let placemark = pm[0]
+                self.locationButton.setTitle("\(placemark.locality!) ⌄", for: .normal)
+
+            }
+        }
     }
 }
